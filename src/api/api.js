@@ -1,7 +1,13 @@
 import axios from 'axios';
 
 export const pizzasAPI = {
-  getPizzas() {
-    return axios.get('http://localhost:3001/pizzas').then(({ data }) => data);
+  getPizzas(sortBy, category) {
+    return axios
+      .get(
+        `/pizzas?${category !== null ? `category=${category}` : ''}&_sort=${
+          sortBy.type
+        }&_order=${sortBy.order}`,
+      )
+      .then(({ data }) => data);
   },
 };
